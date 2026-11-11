@@ -9,14 +9,14 @@ window.WEDDING = {
   bride: {
     name: "Kanaka",
     fullName: "Kanaka",
-    parents: "Daughter of Mr. & Mrs. Naik",
+    parents: "Daughter of Shanthi & Thakur",
     about: "Graceful, kind & the light of our family",
     photo: "" // optional, e.g. "images/bride.jpg"
   },
   groom: {
     name: "Anil",                 // ← change to the groom's name
     fullName: "Anil",
-    parents: "Son of Mr. & Mrs. Sharma", // ← change
+    parents: "Son of Geetha & Somla",
     about: "Warm, caring & forever by her side",
     photo: ""
   },
