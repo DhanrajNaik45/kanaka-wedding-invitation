@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#4a0b25" />
+  <title>Kanaka's Wedding Invitation</title>
+  <meta name="description" content="You are warmly invited to celebrate the wedding of Kanaka." />
+  <meta property="og:title" content="You're invited to Kanaka's Wedding" />
+  <meta property="og:description" content="Tap to open the invitation and celebrate with us." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+SC:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="locked">
+
+  <!-- ============ INTRO GATE ============ -->
+  <div id="gate" class="gate" role="dialog" aria-label="Wedding invitation cover">
+    <div class="door left"><div class="door-frame"></div><svg class="mandala door-mandala" data-mandala aria-hidden="true"></svg></div>
+    <div class="door right"><div class="door-frame"></div><svg class="mandala door-mandala" data-mandala aria-hidden="true"></svg></div>
+    <div class="toran gate-toran" data-toran aria-hidden="true"></div>
+
+    <div class="gate-content">
+      <p class="gate-kicker">Shubh Vivah</p>
+      <p class="gate-sub">You are cordially invited</p>
+      <button id="openBtn" class="seal" aria-label="Open the invitation">
+        <span class="seal-ring"></span>
+        <span class="seal-mono" data-bind="initials">K &amp; A</span>
+      </button>
+      <p class="gate-hint">Tap the seal to open</p>
+    </div>
+  </div>
+
+  <canvas id="petals" aria-hidden="true"></canvas>
+
+  <button id="musicBtn" class="music-btn" aria-label="Toggle music" hidden>
+    <span class="bars"><i></i><i></i><i></i><i></i></span>
+  </button>
+
+  <!-- ============ MAIN ============ -->
+  <main class="app">
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="toran" data-toran aria-hidden="true"></div>
+      <svg class="mandala hero-mandala" data-mandala aria-hidden="true"></svg>
+      <div class="hero-inner">
+        <div class="ganesh reveal" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><use href="#om"/></svg>
+        </div>
+        <p class="invocation reveal" data-bind="invocation"></p>
+        <p class="eyebrow reveal">With the blessings of the Almighty<br/>and our beloved families</p>
+        <h1 class="names reveal">
+          <span class="name gold-text" data-bind="bride.name"></span>
+          <span class="amp">&amp;</span>
+          <span class="name gold-text" data-bind="groom.name"></span>
+        </h1>
+        <p class="tagline reveal">are tying the knot</p>
+        <div class="date-pill reveal"><span data-bind="weddingDateLong"></span></div>
+        <p class="hero-city reveal" data-bind="city"></p>
+        <a class="scroll-cue" href="#couple" aria-label="Scroll down"><span></span></a>
+      </div>
+    </section>
+
+    <!-- COUPLE -->
+    <section id="couple" class="section couple">
+      <div class="sec-head reveal">
+        <span class="kicker">The Bride &amp; The Groom</span>
+        <h2>Two Hearts, One Soul</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="couple-grid">
+        <article class="person reveal" data-person="bride"></article>
+        <div class="knot reveal" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 41s-15-9.4-15-20.2A8.3 8.3 0 0 1 24 15a8.3 8.3 0 0 1 15 5.8C39 31.6 24 41 24 41z"/></svg>
+        </div>
+        <article class="person reveal" data-person="groom"></article>
+      </div>
+      <p class="invite-msg reveal" data-bind="message"></p>
+    </section>
+
+    <!-- SCRATCH -->
+    <section id="date" class="section scratch-sec">
+      <div class="sec-head reveal">
+        <span class="kicker">A little surprise</span>
+        <h2>Scratch to Reveal</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="coins reveal">
+        <div class="coin"><div class="coin-face"><small>Day</small><b data-bind="coin.day"></b></div><canvas></canvas></div>
+        <div class="coin"><div class="coin-face"><small>Month</small><b data-bind="coin.month"></b></div><canvas></canvas></div>
+        <div class="coin"><div class="coin-face"><small>Year</small><b data-bind="coin.year"></b></div><canvas></canvas></div>
+      </div>
+      <p class="scratch-note reveal" id="scratchNote">Use your finger to scratch the golden coins ✨</p>
+      <div class="revealed" id="revealed">
+        <p class="gold-script">Save the Date!</p>
+        <p data-bind="weddingDateFull"></p>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="section countdown-sec">
+      <div class="sec-head light reveal">
+        <span class="kicker">Counting down to forever</span>
+        <h2>The Big Day</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="countdown reveal" id="countdown">
+        <div class="tick"><b data-cd="d">00</b><small>Days</small></div>
+        <div class="tick"><b data-cd="h">00</b><small>Hours</small></div>
+        <div class="tick"><b data-cd="m">00</b><small>Minutes</small></div>
+        <div class="tick"><b data-cd="s">00</b><small>Seconds</small></div>
+      </div>
+      <p class="cd-done" id="cdDone" hidden>The celebrations have begun! 🎉</p>
+    </section>
+
+    <!-- EVENTS -->
+    <section id="events" class="section events-sec">
+      <div class="sec-head reveal">
+        <span class="kicker">Join us for</span>
+        <h2>The Celebrations</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <!-- VENUE -->
+    <section id="venue" class="section venue-sec">
+      <div class="sec-head reveal">
+        <span class="kicker">Where it all happens</span>
+        <h2>The Venue</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="venue-card reveal">
+        <div class="venue-arch">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4 6 20v4h52v-4L32 4zm-20 24v22h6V28h-6zm11 0v22h6V28h-6zm12 0v22h6V28h-6zm11 0v22h6V28h-6zM4 54v6h56v-6H4z"/></svg>
+        </div>
+        <h3 data-bind="venue.name"></h3>
+        <p data-bind="venue.address"></p>
+        <div class="map-wrap"><iframe id="mapFrame" title="Venue map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+        <a class="btn btn-gold" id="dirBtn" target="_blank" rel="noopener">Get Directions</a>
+      </div>
+    </section>
+
+    <!-- INFO -->
+    <section class="section info-sec">
+      <div class="sec-head reveal">
+        <span class="kicker">Good to know</span>
+        <h2>For Our Guests</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="info-grid" id="infoGrid"></div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp" class="section rsvp-sec">
+      <div class="sec-head light reveal">
+        <span class="kicker">Kindly respond</span>
+        <h2>RSVP</h2>
+        <div class="divider"></div>
+      </div>
+      <form class="rsvp reveal" id="rsvpForm" novalidate>
+        <label class="field">
+          <span>Your Name</span>
+          <input name="name" type="text" autocomplete="name" placeholder="Enter your name" required />
+        </label>
+        <fieldset class="field">
+          <legend>Will you be attending?</legend>
+          <div class="choice">
+            <label><input type="radio" name="attend" value="yes" checked /><span>Joyfully accept</span></label>
+            <label><input type="radio" name="attend" value="no" /><span>Regretfully decline</span></label>
+          </div>
+        </fieldset>
+        <div class="field guests-field">
+          <span>Number of guests</span>
+          <div class="stepper">
+            <button type="button" data-step="-1" aria-label="Fewer guests">−</button>
+            <output id="guestCount">1</output>
+            <button type="button" data-step="1" aria-label="More guests">+</button>
+          </div>
+        </div>
+        <label class="field">
+          <span>Blessings for the couple</span>
+          <textarea name="message" rows="3" placeholder="Write your wishes…"></textarea>
+        </label>
+        <p class="form-error" id="formError" hidden>Please enter your name 🙏</p>
+        <button class="btn btn-gold wide" type="submit">Send RSVP</button>
+      </form>
+      <div class="thanks" id="thanks" hidden>
+        <p class="gold-script">Thank you!</p>
+        <p id="thanksText"></p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="toran small" data-toran aria-hidden="true"></div>
+      <svg class="mandala footer-mandala" data-mandala aria-hidden="true"></svg>
+      <p class="kicker">With love &amp; blessings</p>
+      <p class="footer-names gold-text"><span data-bind="bride.name"></span> &amp; <span data-bind="groom.name"></span></p>
+      <p class="footer-fam" data-bind="familyLine"></p>
+      <p class="hashtag" data-bind="hashtag"></p>
+      <button class="btn btn-ghost" id="shareBtn">Share Invitation</button>
+    </footer>
+  </main>
+
+  <!-- DOCK NAV -->
+  <nav class="dock" id="dock" aria-label="Sections">
+    <a href="#home" data-nav="home" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+    <a href="#couple" data-nav="couple" aria-label="Couple"><svg viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/></svg><span>Couple</span></a>
+    <a href="#events" data-nav="events" aria-label="Events"><svg viewBox="0 0 24 24"><path d="M7 2v3M17 2v3M3 9h18M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span>Events</span></a>
+    <a href="#venue" data-nav="venue" aria-label="Venue"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Venue</span></a>
+    <a href="#rsvp" data-nav="rsvp" aria-label="RSVP"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg><span>RSVP</span></a>
+  </nav>
+
+  <!-- shared svg symbols -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="om" viewBox="0 0 64 64">
+      <text x="32" y="47" text-anchor="middle" font-size="44" font-family="serif" fill="currentColor">ॐ</text>
+    </symbol>
+  </svg>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
